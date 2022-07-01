@@ -1,15 +1,15 @@
 #!/bin/bash
 
-LOCAL_REPO="/home/jjtom/Dropbox2"
-POCKET_PARSER="/home/jjtom/software/FrontEnd/pocket_parser"
-export PATH="/home/jjtom/.nvm/versions/node/v16.14.0/bin:$PATH"
+LOCAL_REPO="/home/felix/software/git-felix/Dropbox"
+POCKET_PARSER="/home/felix/software/git-felix/parser"
+export PATH="/home/felix/.nvm/versions/node/v16.14.0/bin:$PATH"
 
 cd $LOCAL_REPO
 
 date_var="$(date)"
 date_var="${date_var// /-}" # replaces all spaces with dashes
-log_file="/home/jjtom/log/$date_var.log"
-mkdir -p "../log" && touch $log_file
+log_file="/home/felix/log/$date_var.log"
+mkdir -p "/home/felix/log" && touch $log_file
 day="${log_file:0:14}" # gets the first 10 characters of string
 
 containsLogFromToday=0
@@ -28,7 +28,7 @@ add_commit_push()
     whereis node >> "$log_file"
     node --version >> "$log_file"
     npm --version >> "$log_file"
-    /home/jjtom/.nvm/versions/node/v16.14.0/bin/npx ts-node src/index.ts >> "$log_file" 2>> "$log_file"
+    /home/felix/.nvm/versions/node/v16.14.0/bin/npx ts-node src/index.ts >> "$log_file" 2>> "$log_file"
 }
 
 
