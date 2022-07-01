@@ -1,35 +1,34 @@
 #!/bin/bash
 
-LOCAL_REPO="/home/localuser"
-USERNAME="username"
-PASSWORD="password"
-REMOTE_REPO="github.com/github_user/repo-name.git"
-EMAIL="email@domain.com"
+LOCAL_REPO="/home/jjtom/Dropbox2"
+POCKET_PARSER="/home/jjtom/software/FrontEnd/pocket_parser"
+export PATH="/home/jjtom/.nvm/versions/node/v16.14.0/bin:$PATH"
 
 cd $LOCAL_REPO
 
 date_var="$(date)"
 date_var="${date_var// /-}" # replaces all spaces with dashes
-log_file="log/$date_var.log"
-mkdir -p "log" && touch $log_file
+log_file="/home/jjtom/log/$date_var.log"
+mkdir -p "../log" && touch $log_file
 day="${log_file:0:14}" # gets the first 10 characters of string
 
 containsLogFromToday=0
 
 add_commit_push()
 {
-    echo "-------ADD COMMENTS-------" >> $log_file
+    echo "-------ADD COMMENTS-------" >> "$log_file"
     git add * >> "$log_file"
     echo "-------COMMIT COMMENTS-------" >> "$log_file"
     git commit -a -m "Auto-commit at $date_var" >> "$log_file"
     echo "-------PUSH COMMENTS-------" >> "$log_file"
-    git push -u https://$USERNAME:$PASSWORD@$REMOTE_REPO master >> "$log_file"
-    if [[ $? != 0 ]]; then
-        echo "Body" | mail -s "push failed" $EMAIL
-        echo "push failed"
-        exit 1
-    fi
-    echo "success!"
+    git push origin master >> "$log_file"
+    cd $POCKET_PARSER
+    echo "-------POCKET PARSER-------" >> "$log_file"
+    whereis npm >> "$log_file"
+    whereis node >> "$log_file"
+    node --version >> "$log_file"
+    npm --version >> "$log_file"
+    /home/jjtom/.nvm/versions/node/v16.14.0/bin/npx ts-node src/index.ts >> "$log_file" 2>> "$log_file"
 }
 
 
@@ -44,14 +43,8 @@ check_for_auto_commit()
     done
 }
 
-if [[ $1 == "-o" ]]; then
-    add_commit_push
-    exit 1
-else 
-    check_for_auto_commit
-    if [ $containsLogFromToday == 0 ]; then
-        add_commit_push
-    fi
-fi
+add_commit_push
+exit 1
+
 
 
