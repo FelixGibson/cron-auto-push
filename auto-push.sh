@@ -1,7 +1,7 @@
 #!/bin/bash
 
 LOCAL_REPO="/home/felix/software/git-felix/Dropbox"
-POCKET_PARSER="/home/felix/software/git-felix/parser"
+POCKET_PARSER="/home/felix/software/git-felix/parser-rs"
 export PATH="/home/felix/.nvm/versions/node/v16.14.0/bin:$PATH"
 
 cd $LOCAL_REPO
@@ -24,11 +24,7 @@ add_commit_push()
     git push origin master >> "$log_file"
     cd $POCKET_PARSER
     echo "-------POCKET PARSER-------" >> "$log_file"
-    whereis npm >> "$log_file"
-    whereis node >> "$log_file"
-    node --version >> "$log_file"
-    npm --version >> "$log_file"
-    /home/felix/.nvm/versions/node/v16.14.0/bin/npx ts-node src/index.ts >> "$log_file" 2>> "$log_file"
+    /home/felix/.cargo/bin/cargo run main.rs  >> "$log_file" 2>> "$log_file"
 }
 
 
