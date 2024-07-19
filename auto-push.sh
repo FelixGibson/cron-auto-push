@@ -24,7 +24,7 @@ add_commit_push()
     git push origin master >> "$log_file"
     cd $POCKET_PARSER
     echo "-------POCKET PARSER-------" >> "$log_file"
-    /home/felix/.cargo/bin/cargo run main.rs  >> "$log_file" 2>> "$log_file"
+    /home/felix/.cargo/bin/cargo run  >> "$log_file" 2>> "$log_file"
 }
 
 
