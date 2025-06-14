@@ -1,7 +1,7 @@
 #!/bin/bash
 
 LOCAL_REPO="/home/felix/software/git-felix/Dropbox"
-POCKET_PARSER="/home/felix/software/git-felix/parser-rs"
+POCKET_PARSER="/home/felix/software/git-felix/raindrop-rs"
 export PATH="/home/felix/.nvm/versions/node/v16.14.0/bin:$PATH"
 
 cd $LOCAL_REPO
@@ -21,7 +21,7 @@ add_commit_push()
     echo "-------COMMIT COMMENTS-------" >> "$log_file"
     git commit -a -m "Auto-commit at $date_var" >> "$log_file"
     echo "-------PUSH COMMENTS-------" >> "$log_file"
-    git push origin main >> "$log_file"
+    git push  >> "$log_file"
     cd $POCKET_PARSER
     echo "-------POCKET PARSER-------" >> "$log_file"
     /home/felix/.cargo/bin/cargo run  >> "$log_file" 2>> "$log_file"
